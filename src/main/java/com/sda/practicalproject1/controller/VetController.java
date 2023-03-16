@@ -1,5 +1,6 @@
 package com.sda.practicalproject1.controller;
 
+import com.sda.practicalproject1.model.Vet;
 import com.sda.practicalproject1.repository.exception.EntityUpdateFailedException;
 import com.sda.practicalproject1.service.VetService;
 
@@ -34,6 +35,11 @@ public class VetController {
             System.err.println("Please retry!");
         }catch (Exception e){
             System.err.println("Internal server error");
+        }
+    }
+    public void displayAllVets(){
+        for(Vet vet : vetService.getAllVets()){
+            System.out.println((vet.getId()+" "+vet.getFirstName()+" "+vet.getLastName()));
         }
     }
 }
