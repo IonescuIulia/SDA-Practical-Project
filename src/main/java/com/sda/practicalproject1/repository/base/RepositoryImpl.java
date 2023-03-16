@@ -79,7 +79,7 @@ public class RepositoryImpl<T> implements Repository<T> {
     @Override
     public List<T> findAll() {
         try(Session session = SessionManager.getSessionFactory().openSession()){
-            Query<T> query = session.createQuery("from" + entityClass.getSimpleName());
+            Query<T> query = session.createQuery("from " + entityClass.getSimpleName());
             return  query.list();
         }
     }
