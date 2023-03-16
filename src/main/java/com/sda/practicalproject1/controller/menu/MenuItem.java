@@ -1,6 +1,4 @@
-package com.sda.practicalproject1.controler.menu;
-
-import org.hibernate.mapping.UniqueKey;
+package com.sda.practicalproject1.controller.menu;
 
 public enum MenuItem {
 

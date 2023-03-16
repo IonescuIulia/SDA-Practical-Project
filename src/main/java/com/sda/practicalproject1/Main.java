@@ -1,19 +1,23 @@
 package com.sda.practicalproject1;
 
-import com.sda.practicalproject1.controler.menu.MenuItem;
-import com.sda.practicalproject1.model.Vet;
-import com.sda.practicalproject1.repository.VetRepository;
+import com.sda.practicalproject1.controller.VetController;
+import com.sda.practicalproject1.controller.menu.MenuItem;
 import com.sda.practicalproject1.repository.VetRepositoryImpl;
-import com.sda.practicalproject1.repository.exception.EntityUpdateFailedException;
+import com.sda.practicalproject1.service.VetServiceImpl;
 import com.sda.practicalproject1.utils.SessionManager;
 
-import javax.swing.plaf.MenuItemUI;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+
         Scanner scanner = new Scanner(System.in);
         SessionManager.getSessionFactory();
+        VetController vetController = new VetController(
+                new VetServiceImpl(new VetRepositoryImpl()),
+                scanner
+        );
+
 
         for (int i = 1; i <= 100; i++) {
             System.out.println("///////////////////////////////////////////////////////////////////////////////////");
@@ -34,7 +38,7 @@ public class Main {
 
             switch (selectedOption) {
                 case ADD_VET:
-                    System.out.println("Add vet not implemented");
+                    vetController.createVet();
                     break;
                 case UPDATE_VET:
                     System.out.println("Update vet not implemented");
