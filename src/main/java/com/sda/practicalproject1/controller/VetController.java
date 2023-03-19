@@ -6,6 +6,7 @@ import com.sda.practicalproject1.service.VetService;
 import com.sda.practicalproject1.service.exception.EntitiyNotFoundException;
 
 import java.nio.channels.ScatteringByteChannel;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class VetController {
@@ -71,7 +72,23 @@ public class VetController {
         } catch (Exception e){
         System.err.println("Internal server error");
     }
-
-
     }
+    public void findVetById(){
+       try{
+           System.out.println("Please enter vet's id");
+           long id = Long.parseLong(scanner.nextLine());
+           Optional <Vet> optionalVet = vetService.findVetbyId(id);
+           if (optionalVet.isPresent()){
+               System.err.println(optionalVet.get());
+           } else {
+               System.err.println("Vet was not found by id" );
+           }
+       }catch (NumberFormatException e){
+           System.err.println("Please insert a valid numeric id");
+       } catch (IllegalArgumentException e){
+           System.err.println(e.getMessage());
+       }catch (Exception e){
+           System.err.println("Internal server error");
+    }
+}
 }

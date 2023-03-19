@@ -5,6 +5,7 @@ import com.sda.practicalproject1.repository.exception.EntityUpdateFailedExceptio
 import com.sda.practicalproject1.service.exception.EntitiyNotFoundException;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface VetService {
 
@@ -18,4 +19,6 @@ public interface VetService {
     List<Vet> getAllVets();
 
     void updateVet(long id, String lastName, String address, String speciality) throws EntityUpdateFailedException, EntitiyNotFoundException;
+    Optional <Vet> findVetbyId(long id);
 }
+
