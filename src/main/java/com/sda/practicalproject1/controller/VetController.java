@@ -33,18 +33,20 @@ public class VetController {
             System.out.println("Vet's details successfully saved!");
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
-        } catch (EntityUpdateFailedException e){
+        } catch (EntityUpdateFailedException e) {
             System.err.println(e.getMessage());
             System.err.println("Please retry!");
-        }catch (Exception e){
+        } catch (Exception e) {
             System.err.println("Internal server error");
         }
     }
-    public void displayAllVets(){
-        for(Vet vet : vetService.getAllVets()){
-            System.out.println((vet.getId()+" "+vet.getFirstName()+" "+vet.getLastName()));
+
+    public void displayAllVets() {
+        for (Vet vet : vetService.getAllVets()) {
+            System.out.println((vet.getId() + " " + vet.getFirstName() + " " + vet.getLastName()));
         }
     }
+
     public void updateVet() {
         try {
             System.out.println("Please enter vet's id");
@@ -60,35 +62,54 @@ public class VetController {
             System.out.println("Vet has been updated");
 
 
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             System.err.println("Please insert a valid numeric id");
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
-        }catch (EntityUpdateFailedException e) {
+        } catch (EntityUpdateFailedException e) {
             System.err.println(e.getMessage());
             System.err.println("Please retry!");
+        } catch (EntitiyNotFoundException e) {
+            System.err.println(e.getMessage());
+        } catch (Exception e) {
+            System.err.println("Internal server error");
+        }
+    }
+
+    public void findVetById() {
+        try {
+            System.out.println("Please enter vet's id");
+            long id = Long.parseLong(scanner.nextLine());
+            Optional<Vet> optionalVet = vetService.findVetbyId(id);
+            if (optionalVet.isPresent()) {
+                System.err.println(optionalVet.get());
+            } else {
+                System.err.println("Vet was not found by id");
+            }
+        } catch (NumberFormatException e) {
+            System.err.println("Please insert a valid numeric id");
+        } catch (IllegalArgumentException e) {
+            System.err.println(e.getMessage());
+        } catch (Exception e) {
+            System.err.println("Internal server error");
+        }
+    }
+
+    public void deleteVetById() {
+        try {
+            System.out.println("Please enter vet's id");
+            long id = Long.parseLong(scanner.nextLine());
+            vetService.deleteVetById(id);
+            System.out.println("Vet was deleted");
+        } catch (NumberFormatException e) {
+            System.err.println("Please insert a valid numeric id");
+        } catch (IllegalArgumentException e) {
+            System.err.println(e.getMessage());
+
         }catch (EntitiyNotFoundException e){
             System.err.println(e.getMessage());
-        } catch (Exception e){
-        System.err.println("Internal server error");
+        }catch (Exception e) {
+            System.err.println("Internal server error");
+        }
     }
-    }
-    public void findVetById(){
-       try{
-           System.out.println("Please enter vet's id");
-           long id = Long.parseLong(scanner.nextLine());
-           Optional <Vet> optionalVet = vetService.findVetbyId(id);
-           if (optionalVet.isPresent()){
-               System.err.println(optionalVet.get());
-           } else {
-               System.err.println("Vet was not found by id" );
-           }
-       }catch (NumberFormatException e){
-           System.err.println("Please insert a valid numeric id");
-       } catch (IllegalArgumentException e){
-           System.err.println(e.getMessage());
-       }catch (Exception e){
-           System.err.println("Internal server error");
-    }
-}
 }

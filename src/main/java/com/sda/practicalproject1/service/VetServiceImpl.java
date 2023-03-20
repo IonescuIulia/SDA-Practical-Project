@@ -47,7 +47,7 @@ public class VetServiceImpl implements VetService {
 
     @Override
     public void updateVet(long id, String lastName, String address, String speciality) throws EntityUpdateFailedException, EntitiyNotFoundException {
-        if (id<=0) {
+        if (id <= 0) {
             throw new IllegalArgumentException("Id is less or equal to zero");
         }
         if (lastName == null || lastName.isBlank() || lastName.isEmpty()) {
@@ -60,7 +60,7 @@ public class VetServiceImpl implements VetService {
             throw new IllegalArgumentException("Speciality is null or blank");
         }
         Optional<Vet> optionalVet = vetRepository.findById(id);
-        if(optionalVet.isPresent()){
+        if (optionalVet.isPresent()) {
             Vet vet = optionalVet.get();
             vet.setLastName(lastName);
             vet.setAddress(address);
@@ -68,17 +68,29 @@ public class VetServiceImpl implements VetService {
 
             vetRepository.update(vet);
 
-        } else
-        {
-           throw new EntitiyNotFoundException("Vet not found by id " + id);
+        } else {
+            throw new EntitiyNotFoundException("Vet not found by id " + id);
         }
     }
 
     @Override
     public Optional<Vet> findVetbyId(long id) {
-        if (id<=0) {
-            throw new IllegalArgumentException("Id is less or equal to zero");
+        if (id <= 0) {
+            throw new IllegalArgumentException("Please insert a correct id, must be bigger than 0");
         }
         return vetRepository.findById(id);
+    }
+
+    @Override
+    public void deleteVetById(long id) throws EntityUpdateFailedException, EntitiyNotFoundException {
+        if (id <= 0) {
+            throw new IllegalArgumentException("Id is less or equal to zero");
+        }
+        Optional<Vet> vetOptional = vetRepository.findById(id);
+        if (vetOptional.isPresent()) {
+            vetRepository.delete(vetOptional.get());
+        } else {
+            throw new EntitiyNotFoundException("Vet not found by id " + id);
+        }
     }
 }

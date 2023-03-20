@@ -20,5 +20,7 @@ public interface VetService {
 
     void updateVet(long id, String lastName, String address, String speciality) throws EntityUpdateFailedException, EntitiyNotFoundException;
     Optional <Vet> findVetbyId(long id);
+
+    void deleteVetById(long id) throws EntityUpdateFailedException, EntitiyNotFoundException;
 }
 
