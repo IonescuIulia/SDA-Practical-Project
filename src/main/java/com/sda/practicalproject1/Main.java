@@ -60,6 +60,9 @@ public class Main {
                 case ADD_PET:
                     petController.createPet();
                     break;
+                case VIEW_ALL_PETS:
+                    petController.viewAllPets();
+                    break;
                 case EXIT:
                     System.out.println("Good bye!");
                     break;
