@@ -84,7 +84,7 @@ public class VetController {
             if (optionalVet.isPresent()) {
                 System.err.println(optionalVet.get());
             } else {
-                System.err.println("Vet was not found by id");
+                System.err.println("Vet was not found by id" + id);
             }
         } catch (NumberFormatException e) {
             System.err.println("Please insert a valid numeric id");

@@ -5,9 +5,11 @@ import com.sda.practicalproject1.repository.exception.EntityUpdateFailedExceptio
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 public interface PetService {
     void addPet(String race, Date dateOfBirth, boolean isVaccinated, String ownerName
     ) throws EntityUpdateFailedException;
-    List<Pet> getAllPets()
+    List<Pet> getAllPets();
+    Optional<Pet> getPetById(long id);
 }

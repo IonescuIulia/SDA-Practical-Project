@@ -1,5 +1,7 @@
 package com.sda.practicalproject1.controller;
 
+import com.sda.practicalproject1.model.Pet;
+import com.sda.practicalproject1.model.Vet;
 import com.sda.practicalproject1.repository.exception.EntityUpdateFailedException;
 import com.sda.practicalproject1.service.PetService;
 
@@ -10,6 +12,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class PetController {
@@ -52,5 +55,23 @@ public class PetController {
     public void viewAllPets(){
         petService.getAllPets().stream().forEach(pet -> System.out.println(pet.getId()
                 + " "+ pet.getRace() + " "+ pet.getOwnerName()));
+    }
+    public void viewPetById(){
+        try {
+            System.out.println("Please enter pet's id");
+            long id = Long.parseLong(scanner.nextLine());
+            Optional<Pet> optionalPet = petService.getPetById(id);
+            if (optionalPet.isPresent()) {
+                System.err.println(optionalPet.get());
+            } else {
+                System.err.println("Pet was not found by id"+ id);
+            }
+        } catch (NumberFormatException e) {
+            System.err.println("Please insert a valid numeric id");
+        } catch (IllegalArgumentException e) {
+            System.err.println(e.getMessage());
+        } catch (Exception e) {
+            System.err.println("Internal server error");
+        }
     }
 }
