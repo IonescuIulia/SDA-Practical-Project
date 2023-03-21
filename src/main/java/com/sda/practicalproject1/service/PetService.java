@@ -12,8 +12,9 @@ public interface PetService {
     void addPet(String race, Date dateOfBirth, boolean isVaccinated, String ownerName
     ) throws EntityUpdateFailedException;
     List<Pet> getAllPets();
-    void updatePet(long id, boolean isVaccinated, String ownerName) throws EntitiyNotFoundException, EntityUpdateFailedException
+
 
     Optional<Pet> getPetById(long id);
+    void updatePet(long id, boolean isVaccinated, String ownerName) throws EntitiyNotFoundException, EntityUpdateFailedException;
     void deletePetById(long id) throws EntityUpdateFailedException, EntitiyNotFoundException;
 }
